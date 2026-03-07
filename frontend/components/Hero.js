@@ -27,14 +27,12 @@ export default function Hero() {
 
   return (
     <section className="min-h-screen flex items-center relative overflow-hidden">
-      {/* Background grid */}
       <div className="absolute inset-0 opacity-5"
         style={{
           backgroundImage: 'linear-gradient(#00ff87 1px, transparent 1px), linear-gradient(90deg, #00ff87 1px, transparent 1px)',
           backgroundSize: '60px 60px',
         }}
       />
-      {/* Glow */}
       <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6 py-32 relative z-10">
@@ -68,8 +66,6 @@ export default function Hero() {
           </a>
         </div>
       </div>
-
-      {/* Decorative side text */}
       <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-4">
         <div className="h-24 w-px bg-gradient-to-b from-transparent to-accent" />
         <span className="font-mono text-xs text-muted tracking-[0.3em] rotate-90 whitespace-nowrap">

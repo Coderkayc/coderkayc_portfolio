@@ -3,7 +3,6 @@ import axios from 'axios';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
-// Fallback data if backend is not running
 const fallbackProjects = [
   {
     _id: '1',
@@ -41,7 +40,7 @@ export default function Projects() {
       .then(res => {
         if (res.data.length > 0) setProjects(res.data);
       })
-      .catch(() => {/* use fallback */})
+      .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
 
@@ -59,7 +58,7 @@ export default function Projects() {
               key={project._id}
               className="border border-border p-6 group hover:border-accent transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
             >
-              {/* Hover glow */}
+
               <div className="absolute inset-0 bg-accent/3 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
               <div className="flex justify-between items-start mb-4">
