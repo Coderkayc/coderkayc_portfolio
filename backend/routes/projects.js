@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Project = require('../models/Project');
 
-// GET all projects
 router.get('/', async (req, res) => {
   try {
     const projects = await Project.find().sort({ createdAt: -1 });
@@ -12,7 +11,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// POST a new project (protected in production)
 router.post('/', async (req, res) => {
   try {
     const project = new Project(req.body);
@@ -23,7 +21,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Seed sample projects
 router.post('/seed', async (req, res) => {
   try {
     await Project.deleteMany({});

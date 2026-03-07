@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Contact = require('../models/Contact');
 
-// POST contact message
 router.post('/', async (req, res) => {
   try {
     const { name, email, message } = req.body;

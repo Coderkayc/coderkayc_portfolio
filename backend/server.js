@@ -7,12 +7,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// MongoDB Connection
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/portfolio')
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB error:', err));
 
-// Routes
 app.use('/api/projects', require('./routes/projects'));
 app.use('/api/contact', require('./routes/contact'));
 
