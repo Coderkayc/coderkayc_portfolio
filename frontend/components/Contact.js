@@ -1,30 +1,34 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState(null); 
+  const [status, setStatus] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('loading');
+
     try {
-      await axios.post(`${API_URL}/api/contact`, form);
+      const res = await axios.post(`${API_URL}/api/contact`, form);
+      console.log('Success:', res.data);
+
       setStatus('success');
       setForm({ name: '', email: '', message: '' });
-    } catch {
-      setStatus('error');
-    }
-  };
+  } catch (err) {
+    console.error('Contact form error:', err.response?.data || err.message);
+    setStatus('error');
+  }
+};
 
-  const links = [
-    { label: 'GitHub', href: 'https://github.com/Coderkayc' },
-    { label: 'LinkedIn', href: 'https://linkedin.com/in/kosi-casmir-ovaga' },
-    { label: 'Email', href: 'mailto:valentinekosi2@gmail.com' },
-    { label: 'X', href: 'https://x.com/Coderkayc' },
-  ];
+const links = [
+  { label: 'GitHub', href: 'https://github.com/Coderkayc' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/kosi-casmir-ovaga' },
+  { label: 'Email', href: 'mailto:valentinekosi2@gmail.com' },
+  { label: 'X', href: 'https://x.com/Coderkayc' },
+];
 
   return (
     <section id="contact" className="py-32 bg-surface">
@@ -127,3 +131,4 @@ export default function Contact() {
     </section>
   );
 }
+
