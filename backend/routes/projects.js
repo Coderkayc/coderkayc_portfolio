@@ -26,18 +26,19 @@ router.post('/seed', async (req, res) => {
     await Project.deleteMany({});
     const sample = [
       {
-        title: 'E-Commerce REST API',
-        description: 'Scalable REST API for an e-commerce platform with JWT auth, product management, and order processing.',
-        tech: ['Node.js', 'Express', 'MongoDB', 'JWT', 'Redis'],
-        githubUrl: 'https://github.com',
+        title: 'Attendance System',
+        description: 'A full-stack QR-code based attendance management system built for the University of Nigeria, Nsukka (UNN). The system enables lecturers to generate attendance sessions using QR codes, students to mark attendance securely, and administrators to manage courses and generate attendance reports.',
+        tech: ['Node.js', 'Express', 'MongoDB', 'JWT', 'Next.js', 'TailwindCSS'],
+        githubUrl: 'https://github.com/Coderkayc/Attendance-System',
+        liveUrl: 'https://attendance-system-rho-virid.vercel.app',
         featured: true,
       },
       {
-        title: 'Real-Time Chat App',
-        description: 'WebSocket-powered chat application with rooms, typing indicators, and message persistence.',
-        tech: ['Node.js', 'Socket.io', 'MongoDB', 'Next.js'],
-        githubUrl: 'https://github.com',
-        liveUrl: 'https://example.com',
+        title: 'Luminest Africa',
+        description: 'LUMINEST AFRICA is a web app that helps Nigerian households track and understand what they spend on electricity — across NEPA prepaid tokens, generator diesel, and solar top-ups — all in one place. It provides insights into energy consumption patterns, helps users optimize their electricity usage, and ultimately saves them money.',
+        tech: ['Node.js', 'Express', 'MongoDB', 'Next.js', 'TypeScript', 'TailwindCSS'],
+        githubUrl: 'https://github.com/Coderkayc/LUMINEST-AFRICA',
+        liveUrl: 'https://luminestafrica.vercel.app/',
         featured: true,
       },
       {
