@@ -28,7 +28,7 @@ export default function Navbar() {
       scrolled || menuOpen ? 'py-4 bg-bg/95 backdrop-blur border-b border-border' : 'py-6'
     }`}>
       <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
-        <a href="#" className="font-mono text-accent text-sm tracking-widest uppercase">
+        <a href="#" className="font-bold text-accent text-sm tracking-widest uppercase">
           Coderkayc
         </a>
 
