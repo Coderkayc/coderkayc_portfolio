@@ -64,7 +64,32 @@ export default function Hero() {
             className="px-6 py-3 border border-border text-text font-mono text-sm tracking-wider uppercase hover:border-accent hover:text-accent transition-colors">
             Contact Me
           </a>
-        </div>
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-fade-up"
+  style={{ animationDelay: '0.4s', opacity: 0 }}>
+  <a href="#projects"
+    style={{ backgroundColor: 'var(--accent)', color: 'var(--bg)' }}
+    className="px-6 py-3 font-mono text-sm font-bold tracking-wider uppercase text-center transition-opacity hover:opacity-80">
+    View Work
+  </a>
+  <a href="#contact"
+    style={{ border: '1px solid var(--border)', color: 'var(--text)' }}
+    className="px-6 py-3 font-mono text-sm tracking-wider uppercase text-center transition-colors">
+    Contact Me
+  </a>
+  <a href="/cv.pdf"
+    download="YourName_CV.pdf"
+    style={{ border: '1px solid var(--accent)', color: 'var(--accent)' }}
+    className="px-6 py-3 font-mono text-sm tracking-wider uppercase text-center transition-opacity hover:opacity-70 flex items-center justify-center gap-2"
+  >
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    Download CV
+  </a>
+</div>
+      </div>
       </div>
       <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-4">
         <div className="h-24 w-px bg-gradient-to-b from-transparent to-accent" />
