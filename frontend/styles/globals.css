@@ -57,3 +57,27 @@ body {
   vertical-align: middle;
   margin-right: 12px;
 }
+.desktop-menu{
+  display:flex;
+  align-items:center;
+  gap:28px;
+}
+
+.mobile-menu{
+  display:none;
+}
+
+/* MOBILE */
+@media (max-width:768px){
+
+  .desktop-menu{
+    display:none;
+  }
+
+  .mobile-menu{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+}

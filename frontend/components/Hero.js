@@ -64,19 +64,6 @@ export default function Hero() {
             className="px-6 py-3 border border-border text-text font-mono text-sm tracking-wider uppercase hover:border-accent hover:text-accent transition-colors rounded-md flex items-center gap-2">
             Contact Me
           </a>
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-fade-up"
-  style={{ animationDelay: '0.4s', opacity: 0 }}>
-  <a href="/cv.pdf"
-    download="Coderkayc_CV.pdf"
-    className="px-6 py-3 bg-accent text-bg font-mono text-sm font-bold tracking-wider uppercase hover:bg-accent/80 transition-colors rounded-md flex items-center gap-2">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-      <polyline points="7 10 12 15 17 10"/>
-      <line x1="12" y1="15" x2="12" y2="3"/>
-    </svg>
-    Download CV
-  </a>
-</div>
 </div>
 </div>
 <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-4">

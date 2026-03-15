@@ -33,6 +33,15 @@ const DownloadIcon = () => (
 export default function Navbar({ toggleTheme, theme }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Check if mobile on mount
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -41,110 +50,225 @@ export default function Navbar({ toggleTheme, theme }) {
   }, []);
 
   useEffect(() => {
-    const onResize = () => { if (window.innerWidth >= 768) setMenuOpen(false); };
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
+    if (!isMobile) setMenuOpen(false);
+  }, [isMobile]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
-  const navStyle = {
-    backgroundColor: scrolled || menuOpen ? 'var(--bg)' : 'transparent',
-    borderBottom: scrolled || menuOpen ? '1px solid var(--border)' : 'none',
-    transition: 'all 0.3s ease',
-  };
+  const navBg = scrolled || menuOpen
+    ? 'var(--bg)'
+    : 'rgba(10,10,10,0.85)';
 
   return (
-    <nav style={navStyle} className="fixed top-0 left-0 right-0 z-50 py-4 md:py-6 backdrop-blur-sm">
-      <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
+    <nav style={{
+      position: 'fixed',
+      top: 0, left: 0, right: 0,
+      zIndex: 9999,
+      backgroundColor: navBg,
+      borderBottom: scrolled || menuOpen ? '1px solid var(--border)' : 'none',
+      backdropFilter: 'blur(10px)',
+      WebkitBackdropFilter: 'blur(10px)',
+      transition: 'background-color 0.3s ease',
+    }}>
+      {/* Main bar */}
+      <div style={{
+        maxWidth: '1152px',
+        margin: '0 auto',
+        padding: '16px 24px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}>
         {/* Logo */}
-        <a href="#" style={{ color: 'var(--accent)' }} className="font-mono text-sm tracking-widest uppercase">
-          dev.portfolio
+        <a href="#" style={{
+          color: '#00ff87',
+          fontFamily: 'sans-serif',
+          fontSize: '14px',
+          fontWeight: 'bold',
+          letterSpacing: '0.15em',
+          textTransform: 'uppercase',  
+          textDecoration: 'none',
+        }}>
+          Coderkayc
         </a>
 
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-6">
-          {links.map(link => (
-            <a key={link} href={`#${link}`}
-              style={{ color: 'var(--muted)' }}
-              className="font-mono text-xs tracking-wider uppercase hover:opacity-60 transition-opacity">
-              {link}
-            </a>
-          ))}
+        {/* Desktop links — hidden on mobile */}
+        <div className="desktop-menu">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
+            {links.map(link => (
+              <a key={link} href={`#${link}`} style={{
+                color: '#00ff87',
+                fontFamily: 'monospace',
+                fontWeight: 'bold',
+                fontSize: '11px',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+              }}>
+                {link}
+              </a>
+            ))}
 
-          {/* Download CV button */}
-          <a
-            href="/cv.pdf"
-            download="CV.pdf"
-            style={{
+            <a href="/cv.pdf" download="CV.pdf" style={{
               border: '1px solid var(--accent)',
-              color: 'var(--accent)',
-            }}
-            className="flex items-center gap-2 px-3 py-1.5 font-mono text-xs tracking-wider uppercase hover:opacity-70 transition-opacity"
-          >
-            <DownloadIcon />
-            CV
-          </a>
+              color: '#00ff87',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '6px 14px',
+              fontFamily: 'monospace',
+              fontWeight: 'bold',
+              fontSize: '11px',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+            }}>
+              <DownloadIcon /> CV
+            </a>
 
-          {/* Theme toggle */}
-          <button onClick={toggleTheme}
-            style={{ color: 'var(--muted)', border: '1px solid var(--border)' }}
-            className="w-8 h-8 flex items-center justify-center hover:opacity-60 transition-opacity">
-            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-          </button>
+            <button onClick={toggleTheme} style={{
+              background: 'none',
+              border: '1px solid var(--border)',
+              color: '#00ff87',
+              width: '32px',
+              height: '32px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+            }}>
+              {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile right side */}
-        <div className="md:hidden flex items-center gap-3">
-          {/* Theme toggle */}
-          <button onClick={toggleTheme}
-            style={{ color: 'var(--muted)', border: '1px solid var(--border)' }}
-            className="w-8 h-8 flex items-center justify-center">
-            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-          </button>
+        <div className="mobile-menu">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <button onClick={toggleTheme} style={{
+              background: 'none',
+              border: '1px solid var(--border)',
+              color: '#00ff87',
+              width: '32px',
+              height: '32px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+            }}>
+              {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+            </button>
 
-          {/* Hamburger */}
-          <button className="flex flex-col gap-1.5 p-2" onClick={() => setMenuOpen(o => !o)} aria-label="Toggle menu">
-            <span style={{ backgroundColor: 'var(--text)' }}
-              className={`block w-5 h-px transition-all duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
-            <span style={{ backgroundColor: 'var(--text)' }}
-              className={`block w-5 h-px transition-all duration-300 ${menuOpen ? 'opacity-0 scale-x-0' : ''}`} />
-            <span style={{ backgroundColor: 'var(--text)' }}
-              className={`block w-5 h-px transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
-          </button>
+            {/* Hamburger button */}
+            <button
+              onClick={() => setMenuOpen(prev => !prev)}
+              aria-label="Toggle menu"
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                color: '#00ff87',
+                padding: '6px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '5px',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <span style={{
+                display: 'block',
+                width: '24px',
+                height: '2px',
+                backgroundColor: 'var(--accent)',
+                borderRadius: '2px',
+                transition: 'all 0.3s ease',
+                transform: menuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'rotate(0)',
+              }} />
+              <span style={{
+                display: 'block',
+                width: '24px',
+                height: '2px',
+                backgroundColor: 'var(--accent)',
+                borderRadius: '2px',
+                transition: 'all 0.3s ease',
+                opacity: menuOpen ? 0 : 1,
+                transform: menuOpen ? 'scaleX(0)' : 'scaleX(1)',
+              }} />
+              <span style={{
+                display: 'block',
+                width: '24px',
+                height: '2px',
+                backgroundColor: 'var(--accent)',
+                borderRadius: '2px',
+                transition: 'all 0.3s ease',
+                transform: menuOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'rotate(0)',
+              }} />
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile dropdown */}
-      <div className={`md:hidden overflow-hidden transition-all duration-300 ${menuOpen ? 'max-h-72' : 'max-h-0'}`}>
-        <div style={{ borderTop: '1px solid var(--border)' }} className="px-6 py-6 flex flex-col gap-5">
-          {links.map(link => (
-            <a key={link} href={`#${link}`}
+      {/* Mobile dropdown menu */}
+      {isMobile && (
+        <div style={{
+          overflow: 'hidden',
+          maxHeight: menuOpen ? '400px' : '0px',
+          transition: 'max-height 0.35s ease',
+          backgroundColor: 'var(--bg)',
+        }}>
+          <div style={{
+            borderTop: '1px solid var(--border)',
+            padding: '24px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '20px',
+          }}>
+            {links.map(link => (
+              <a
+                key={link}
+                href={`#${link}`}
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  color: '#00ff87',
+                  fontFamily: 'monospace',
+                  fontSize: '15px',
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                  textDecoration: 'none',
+                }}
+              >
+                {link}
+              </a>
+            ))}
+
+            <a
+              href="/cv.pdf"
+              download="CV.pdf"
               onClick={() => setMenuOpen(false)}
-              style={{ color: 'var(--muted)' }}
-              className="font-mono text-sm tracking-widest uppercase hover:opacity-60 transition-opacity">
-              {link}
+              style={{
+                border: '1px solid var(--accent)',
+                color: '#00ff87',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '10px 18px',
+                fontFamily: 'monospace',
+                fontSize: '13px',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+                width: 'fit-content',
+              }}
+            >
+              <DownloadIcon /> Download CV
             </a>
-          ))}
-
-          {/* Download CV in mobile menu */}
-          <a
-          href="/cv.pdf"
-            download="CV.pdf"
-            onClick={() => setMenuOpen(false)}
-            style={{
-              border: '1px solid var(--accent)',
-              color: 'var(--accent)',
-            }}
-            className="flex items-center gap-2 px-4 py-2.5 font-mono text-sm tracking-wider uppercase hover:opacity-70 transition-opacity w-fit">
-            <DownloadIcon />
-            Download CV
-          </a>
+          </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 }
