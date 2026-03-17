@@ -100,7 +100,7 @@ export default function Navbar({ toggleTheme, theme }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
             {links.map(link => (
               <a key={link} href={`#${link}`} style={{
-                color: '#00ff87',
+                Color: '#00ff87',
                 fontFamily: 'monospace',
                 fontWeight: 'bold',
                 fontSize: '11px',
@@ -114,7 +114,7 @@ export default function Navbar({ toggleTheme, theme }) {
 
             <a href="/cv.pdf" download="CV.pdf" style={{
               border: '1px solid var(--accent)',
-              color: '#00ff87',
+              Color: '#00ff87',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
@@ -183,7 +183,7 @@ export default function Navbar({ toggleTheme, theme }) {
                 display: 'block',
                 width: '24px',
                 height: '2px',
-                backgroundColor: 'var(--accent)',
+                Color: '#00ff87',
                 borderRadius: '2px',
                 transition: 'all 0.3s ease',
                 transform: menuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'rotate(0)',
@@ -192,7 +192,7 @@ export default function Navbar({ toggleTheme, theme }) {
                 display: 'block',
                 width: '24px',
                 height: '2px',
-                backgroundColor: 'var(--accent)',
+                Color: '#00ff87',
                 borderRadius: '2px',
                 transition: 'all 0.3s ease',
                 opacity: menuOpen ? 0 : 1,
@@ -202,7 +202,7 @@ export default function Navbar({ toggleTheme, theme }) {
                 display: 'block',
                 width: '24px',
                 height: '2px',
-                backgroundColor: 'var(--accent)',
+                Color: '#00ff87',
                 borderRadius: '2px',
                 transition: 'all 0.3s ease',
                 transform: menuOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'rotate(0)',
